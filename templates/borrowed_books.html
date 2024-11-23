@@ -34,6 +34,7 @@
                     <th>Borrower Name</th>
                     <th>Book Title</th>
                     <th>Borrow Date</th>
+                    <th>Action</th> <!-- New column for actions -->
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +43,9 @@
                     <td>{{ borrowed[2] }}</td>
                     <td>{{ borrowed[1] }}</td>
                     <td>{{ borrowed[3] }}</td>
+                    <td>
+                        <a href="{{ url_for('return_book', borrowed_book_id=borrowed[0]) }}" class="btn btn-danger btn-sm">Return Book</a> <!-- Return Book button -->
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -55,8 +59,8 @@
         </div>
     </footer>
 
-    <script src ="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
