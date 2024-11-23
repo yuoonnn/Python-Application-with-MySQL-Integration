@@ -50,6 +50,9 @@ def create_author():
 def delete_author(author_id):
     connection = create_connection()
     cursor = connection.cursor()
+
+    cursor.execute("DELETE FROM Books WHERE author_id = %s", (author_id,))
+    
     query = "DELETE FROM Authors WHERE id = %s"
     cursor.execute(query, (author_id,))
     connection.commit()
@@ -173,6 +176,7 @@ def return_book(borrowed_book_id):
     connection.commit()
     connection.close()
     return redirect(url_for('borrowers'))
+
 # Query for book count using COUNT and LEFT JOIN
 @app.route('/author_book_count')
 def author_book_count():
@@ -189,6 +193,7 @@ def author_book_count():
     connection.close()
     return render_template('author_book_count.html', author_book_counts=counts)
 
+# Avg
 @app.route('/author_avg_year')
 def author_avg_year():
     connection = create_connection()
@@ -204,6 +209,7 @@ def author_avg_year():
     connection.close()
     return render_template('author_avg_year.html', averages=averages)
 
+# Borrower Route
 @app.route('/borrower_book_count')
 def borrower_book_count():
     connection = create_connection()
@@ -219,6 +225,7 @@ def borrower_book_count():
     connection.close()
     return render_template('borrower_book_count.html', counts=counts)
 
+# Avg
 @app.route('/avg_books_per_author')
 def avg_books_per_author():
     connection = create_connection()
@@ -237,7 +244,7 @@ def avg_books_per_author():
     connection.close()
     return render_template('avg_books_per_author.html', avg_books=avg_count)
 
-
+# Borrowed books
 @app.route('/borrowed_books')
 def borrowed_books():
     connection = create_connection()
