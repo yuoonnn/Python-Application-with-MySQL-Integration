@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 0;
+        }
+        .navbar {
+            background-color: #343a40; /* Darker background for navbar */
+            border-radius: 0; /* Remove border radius */
+        }
+        .navbar-nav .nav-link {
+            color: #ffffff; /* White text color */
+            padding: 15px 20px; /* Increased padding for better spacing */
+            transition: background-color 0.3s; /* Smooth transition for hover effect */
+        }
+        .navbar-nav .nav-link:hover {
+            background-color: #495057; /* Darker shade on hover */
+            color: #ffffff; /* Keep text white on hover */
+        }
+        .welcome-text {
+            margin-top: 30px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .footer {
+            background-color: #e9ecef;
+            padding: 20px 0;
+        }
+        .footer a {
+            color: #007bff;
+        }
+        .footer a:hover {
+            color: #0056b3;
+        }
+    </style>
+    
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header class="header text-center">
+        <h1>Welcome to the Library Management System</h1>
+    </header>
+
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark"> <!-- Use navbar-dark for white text -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('authors') }}">Authors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('books') }}">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('borrowers') }}">Borrowers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('author_book_count') }}">Author Book Count</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('author_avg_year') }}">Average Published Year</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('borrower_book_count') }}">Total Books Borrowed</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('avg_books_per_author') }}">Avg Books Per Author</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="welcome-text text-center">
+            <p class="lead">TITE</p>
+        </div>
+    </div>
+
+    <footer class="footer text-center">
+        <div class="text-center p-3">
+            © 2023 Library Management System | <a href="#">Privacy Policy</a>
+        </div>
+    </footer>
+</body>
+</html>

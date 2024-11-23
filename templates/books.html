@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Books</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Library Management</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('authors') }}">Authors</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('books') }}">Books</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('borrowers') }}">Borrowers</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('borrowed_books') }}">Borrowed Books</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('author_book_count') }}">Author Book Count</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('author_avg_year') }}">Average Published Year</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('borrower_book_count') }}">Total Books Borrowed</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('avg_books_per_author') }}">Avg Books Per Author</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1>Books</h1>
+        <form action="{{ url_for('create_book') }}" method="POST">
+            <div class="form-group">
+                <label for="title">Book Title</label>
+                <input type="text" name="title" placeholder="Book Title" required class="form-control mb-2">
+            </div>
+            <div class="form-group">
+                <label for="author_id">Select Author</label>
+                <select name="author_id" id="author_id" required class="form-control mb-2">
+                    <option value="" disabled selected>Select an Author</option>
+                    {% for author in authors %}
+                        <option value="{{ author[0] }}">{{ author[1] }}</option>
+                    ```html
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="published_year">Published Year</label>
+                <input type="text" name="published_year" placeholder="Published Year" required class="form-control mb-2">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Book</button>
+        </form>
+        <ul class="list-group mt-3">
+            {% for book in books %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ book[1] }} ({{ book[2] }}) 
+                    <a href="{{ url_for('delete_book', book_id=book[0]) }}" class="btn btn-danger btn-sm">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <button onclick="window.history.back();" class="btn btn-secondary mt-3">Back</button>
+    </div>
+
+    <footer class="bg-light text-center text-lg-start mt-5">
+        <div class="text-center p-3">
+            © 2023 Library Management System | <a href="#">Privacy Policy</a>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
