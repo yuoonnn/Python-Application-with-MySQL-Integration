@@ -11,7 +11,7 @@ def create_connection():
             port=3306,
             database='Books',  # Update with your actual database name
             user='root',  # Your MySQL username
-            password=''  # Your MySQL password
+            password='GobJuinws24Xz*'  # Your MySQL password
         )
         if connection.is_connected():
             return connection
