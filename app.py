@@ -51,12 +51,26 @@ def delete_author(author_id):
     connection = create_connection()
     cursor = connection.cursor()
 
-    cursor.execute("DELETE FROM Books WHERE author_id = %s", (author_id,))
+    try:
+        # First, delete any entries in the borrowedbooks table that reference books by this author
+        cursor.execute("DELETE FROM borrowedbooks WHERE book_id IN (SELECT id FROM Books WHERE author_id = %s)", (author_id,))
+        
+        # Now delete the books by this author
+        cursor.execute("DELETE FROM Books WHERE author_id = %s", (author_id,))
+        
+        # Finally, delete the author
+        query = "DELETE FROM Authors WHERE id = %s"
+        cursor.execute(query, (author_id,))
+        
+        # Commit the changes
+        connection.commit()
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        connection.rollback()  # Rollback in case of an error
+    finally:
+        cursor.close()
+        connection.close()
     
-    query = "DELETE FROM Authors WHERE id = %s"
-    cursor.execute(query, (author_id,))
-    connection.commit()
-    connection.close()
     return redirect(url_for('authors'))
 
 @app.route('/update_author', methods=['POST'])
